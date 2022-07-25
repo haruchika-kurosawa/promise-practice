@@ -1,6 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
 
+setTimeout(() => {
+  console.log('A03');
+}, 300);
+
+
+
+console.log('A01');
+new Promise((resolve) => {
+  setTimeout(() => {
+    console.log('A02');
+    resolve();
+  }, 300);
+}).then(() => {
+  console.log('A03');
+});
+
 function App() {
   return (
     <div className="App">
