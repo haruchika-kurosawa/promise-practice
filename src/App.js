@@ -7,14 +7,14 @@ setTimeout(() => {
 
 
 
-console.log('A01');
+console.log('start');
 new Promise((resolve) => {
   setTimeout(() => {
-    console.log('A02');
-    resolve();
+    console.log('promise content');
+    resolve('result data');
   }, 300);
-}).then(() => {
-  console.log('A03');
+}).then((result) => {
+  console.log(result);
 });
 
 function App() {
