@@ -7,15 +7,26 @@ setTimeout(() => {
 
 
 
-console.log('start');
-new Promise((resolve) => {
-  setTimeout(() => {
-    console.log('promise content');
-    resolve('result data');
-  }, 300);
-}).then((result) => {
-  console.log(result);
-});
+function aFunc3(data) {
+  return new Promise(function(okCallback, ngCallback) {
+      setTimeout(function() {
+          if (Math.random() < 0.30) {
+              ngCallback(new Error('ERROR!'));
+          } else {
+              okCallback(data * 2);
+          }
+      }, Math.random() * 1000);
+  });
+}
+
+function sample_reject() {
+  aFunc3(100).then(
+      (data) => { console.log(data); },    // 成功時の処理
+      (e) => { console.log(e); }           // 失敗時の処理
+  );
+}
+
+sample_reject();
 
 function App() {
   return (
