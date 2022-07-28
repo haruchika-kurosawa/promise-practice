@@ -14,6 +14,9 @@ function aFunc3(data) {
               ngCallback(new Error('ERROR!'));
           } else {
               okCallback(data * 2);
+              setTimeout(() => {
+                okCallback('after setTimeout');
+              },400);
           }
       }, Math.random() * 1000);
   });
