@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-
-setTimeout(() => {
-  console.log('A03');
-}, 300);
-
-
+async function resolveSample() {
+  return 'resolve!!';
+}
+console.log('01');
+resolveSample().then(value => {
+  console.log(value); // => resolve!!
+});
+console.log('02');
 
 function aFunc3(data) {
   return new Promise(function(okCallback, ngCallback) {
