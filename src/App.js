@@ -1,69 +1,30 @@
-import logo from "./logo.svg";
 import "./App.css";
-function sampleResolve(value, time) {
-  return new Promise(resolve => {
-      setTimeout(() => {
-          resolve(value);
-          console.log(value);
-      }, time);
-  })
-}
 
-async function sample() {
-  return await sampleResolve(5, 500) * await sampleResolve(10, 1000) + await sampleResolve(20, 100);
-}
+function loadScript(src) {
+	return new Promise((resolve, reject) => {
+		let script = document.createElement("script");
+		script.src = src;
 
-sample().then((v) => {
-  console.log(v);
-});
+		script.onload = () => resolve(script);
+		script.onerror = () => reject(new Error("Script load error: " + src));
 
-function aFunc3(data) {
-	return new Promise(function (okCallback, ngCallback) {
-		setTimeout(function () {
-			if (Math.random() < 0.3) {
-				ngCallback(new Error("ERROR!"));
-			} else {
-				okCallback(data * 2);
-				setTimeout(() => {
-					okCallback("after setTimeout");
-				}, 400);
-			}
-		}, Math.random() * 1000);
+		document.head.append(script);
 	});
 }
 
-function sample_reject() {
-	aFunc3(100).then(
-		(data) => {
-			console.log(data);
-		}, // 成功時の処理
-		(e) => {
-			console.log(e);
-		} // 失敗時の処理
-	);
-}
+let promise = loadScript(
+	"https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"
+);
 
-sample_reject();
+promise.then(
+	(script) => alert(`${script.src} is loaded!`),
+	(error) => alert(`Error: ${error.message}`)
+);
+
+promise.then((script) => alert("Another handler..."));
 
 function App() {
-	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
-	);
+	return <div className="App"></div>;
 }
 
 export default App;
