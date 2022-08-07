@@ -1,28 +1,17 @@
 import "./App.css";
 
 
-const promise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(1);
-  }, 1000);
+const aPromise = new Promise((resolve) => {
+  resolve(100);
 });
-
-function inc(value) {
-  return value++;
-}
-
-function double(value) {
-  return value*2;
-}
-
-function output(value) {
+const thenPromise = aPromise.then((value) => {
   console.log(value);
-}
-
-promise
-.then(inc)
-.then(double)
-.then(output);
+});
+const catchPromise = thenPromise.catch((error) => {
+  console.error(error);
+});
+console.log(aPromise !== thenPromise);
+console.log(thenPromise !== catchPromise);
 
 function App() {
 	return <div className="App"></div>;
