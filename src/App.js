@@ -1,17 +1,20 @@
 import "./App.css";
 
 
-const aPromise = new Promise((resolve) => {
-  resolve(100);
+function onReadyPromise() {
+  return new Promise((resolve) => {
+      const readyState = document.readyState;
+      if (readyState === "interactive" || readyState === "complete") {
+          resolve();
+      } else {
+          window.addEventListener("DOMContentLoaded", resolve);
+      }
+  });
+}
+onReadyPromise().then(() => {
+  console.log("DOM fully loaded and parsed");
 });
-const thenPromise = aPromise.then((value) => {
-  console.log(value);
-});
-const catchPromise = thenPromise.catch((error) => {
-  console.error(error);
-});
-console.log(aPromise !== thenPromise);
-console.log(thenPromise !== catchPromise);
+console.log("==Starting==");
 
 function App() {
 	return <div className="App"></div>;
