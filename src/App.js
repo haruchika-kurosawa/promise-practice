@@ -1,23 +1,17 @@
 import "./App.css";
 
-
-function onReadyPromise() {
+function JSONPromise(value) {
   return new Promise((resolve) => {
-      const readyState = document.readyState;
-      if (readyState === "interactive" || readyState === "complete") {
-          resolve();
-      } else {
-          window.addEventListener("DOMContentLoaded", resolve);
-      }
+      resolve(JSON.parse(value));
   });
 }
-onReadyPromise().then(() => {
-  console.log("DOM fully loaded and parsed");
-});
-console.log("==Starting==");
 
-function App() {
-	return <div className="App"></div>;
-}
+// 実行例
+var string = "xxxxxxxxxxxx";
+JSONPromise(string).then(function (object) {
+  console.log(object);
+}).catch((error) => {
+  console.error(error);
+});
 
 export default App;
