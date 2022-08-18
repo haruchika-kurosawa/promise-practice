@@ -1,17 +1,18 @@
-import "./App.css";
-
-function JSONPromise(value) {
+function timerPromise(time) {
   return new Promise((resolve) => {
-      resolve(JSON.parse(value));
+    setTimeout(() => {
+      resolve(time);
+    }, time);
   });
 }
 
-// 実行例
-var string = "xxxxxxxxxxxx";
-JSONPromise(string).then(function (object) {
-  console.log(object);
-}).catch((error) => {
-  console.error(error);
+Promise.all([
+  timerPromise(100),
+  timerPromise(500),
+  timerPromise(200),
+  timerPromise(300),
+]).then((values) => {
+  console.log(values);
 });
 
 export default App;
